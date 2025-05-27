@@ -25,7 +25,9 @@ CREATE TABLE users (
     last_name VARCHAR(50) NOT NULL,
     email VARCHAR(100) UNIQUE NOT NULL,
     password VARCHAR(255) NOT NULL,
-    phone_number VARCHAR(20)
+    phone_number VARCHAR(20),
+    birthdate DATE,
+    address VARCHAR(255),
 );
 
 -- Payment table (linked to users)
@@ -47,9 +49,9 @@ CREATE TABLE orders (
     order_id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,  -- This is the person who made the booking
     room_id INT NOT NULL,
-    checkin_date DATE NOT NULL,
-    checkout_date DATE NOT NULL,
-    payment_method ENUM('credit_card', 'paypal', 'other') NOT NULL,
+    checkin_date TIMESTAMP NOT NULL,
+    checkout_date TIMESTAMP NOT NULL,
+    payment_method ENUM('credit_card', 'cash', 'other') NOT NULL,
     payment_id INT,
     status ENUM('pending', 'confirmed', 'cancelled', 'completed') DEFAULT 'pending',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
