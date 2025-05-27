@@ -1,11 +1,11 @@
 -- Insert pictures
 INSERT INTO pictures (image_data, file_name, mime_type) VALUES
-(LOAD_FILE('\\\\wsl.localhost\\Ubuntu\\home\\julian\\coding\\fj_hotel_backend\\Images\\Standard-Room-1.jpg'), 'Standard-Room-1.jpg', 'image/jpeg'),
-(LOAD_FILE('\\\\wsl.localhost\\Ubuntu\\home\\julian\\coding\\fj_hotel_backend\\Images\\Suite-Room-2.jpg'), 'Suite-Room-2.jpg', 'image/jpeg'),
-(LOAD_FILE('\\\\wsl.localhost\\Ubuntu\\home\\julian\\coding\\fj_hotel_backend\\Images\\Deluxe-Room-2.webp'), 'Deluxe-Room-2.webp', 'image/webp'),
-(LOAD_FILE('\\\\wsl.localhost\\Ubuntu\\home\\julian\\coding\\fj_hotel_backend\\Images\\Standard-Room-2.jpg'), 'Standard-Room-2.jpg', 'image/jpeg'),
-(LOAD_FILE('\\\\wsl.localhost\\Ubuntu\\home\\julian\\coding\\fj_hotel_backend\\Images\\Suite-Room-1.jpg'), 'Suite-Room-1.jpg', 'image/jpeg'),
-(LOAD_FILE('\\\\wsl.localhost\\Ubuntu\\home\\julian\\coding\\fj_hotel_backend\\Images\\Deluxe-Room-1.webp'), 'Deluxe-Room-1.webp', 'image/webp');
+(LOAD_FILE('/var/lib/mysql-files/Images/Standard-Room-1.jpg'), 'Standard-Room-1.jpg', 'image/jpeg'),
+(LOAD_FILE('/var/lib/mysql-files/Images/Suite-Room-2.jpg'), 'Suite-Room-2.jpg', 'image/jpeg'),
+(LOAD_FILE('/var/lib/mysql-files/Images/Deluxe-Room-2.webp'), 'Deluxe-Room-2.webp', 'image/webp'),
+(LOAD_FILE('/var/lib/mysql-files/Images/Standard-Room-2.jpg'), 'Standard-Room-2.jpg', 'image/jpeg'),
+(LOAD_FILE('/var/lib/mysql-files/Images/Suite-Room-1.jpg'), 'Suite-Room-1.jpg', 'image/jpeg'),
+(LOAD_FILE('/var/lib/mysql-files/Images/Deluxe-Room-1.webp'), 'Deluxe-Room-1.webp', 'image/webp');
 
 -- Insert rooms
 INSERT INTO rooms (room_name, capacity, room_type, category, price, picture_id) VALUES
