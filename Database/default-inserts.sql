@@ -17,9 +17,9 @@ INSERT INTO rooms (room_name, capacity, room_type, category, price, picture_id) 
 ('Suite Room 2', 4, 'room', 'suite', 300.00, 2);
 
 -- Insert users
-INSERT INTO users (first_name, last_name, email, password, phone_number) VALUES
-('Fabian', 'Spiri', 'fababum@gmail.com', '76bfb30e51b77a2da8ec902cff0fe997b4a9e9a5afddccef511c669155386c47', '+41 79 570 46 59'),
-('Julian', 'Schwab', 'jla.schwab@gmail.com', 'bb299f20f2858d8936659521f8b1d0d27cddb31e6c45ae2efdbbe2580e0a7bc2', '+41 77 460 46 59');
+INSERT INTO users (first_name, last_name, email, password, phone_number, birthdate, address) VALUES
+('Fabian', 'Spiri', 'fababum@gmail.com', '76bfb30e51b77a2da8ec902cff0fe997b4a9e9a5afddccef511c669155386c47', '+41 79 570 46 59', '2000-01-01', 'Some Street 2, Bern'),
+('Julian', 'Schwab', 'jla.schwab@gmail.com', 'bb299f20f2858d8936659521f8b1d0d27cddb31e6c45ae2efdbbe2580e0a7bc2', '+41 77 460 46 59', '2000-01-01', 'Some Street 1, Zürich');
 
 -- Insert payment (for Julian)
 INSERT INTO payments (user_id, cardholder_name, card_number, expiry_month, expiry_year, cvv, billing_address) VALUES
@@ -27,13 +27,7 @@ INSERT INTO payments (user_id, cardholder_name, card_number, expiry_month, expir
 
 -- Insert order: Julian books Suite Room 1 (id=5) for himself and Fabian
 INSERT INTO orders (user_id, room_id, checkin_date, checkout_date, payment_method, payment_id, status) VALUES
-(2, 5, '2025-05-27', '2025-06-15', 'credit_card', 1, 'confirmed');
+(2, 5, '2025-05-27 14:00:00', '2025-06-15 12:00:00', 'credit_card', 1, 'confirmed');
 
--- Julian's order id is 1 (auto_incremented). Add Julian and Fabian as guests.
--- Replace `1` with the actual `order_id` if different in your DB.
-
--- Link Julian (user_id=2) as guest
 INSERT INTO order_guests (order_id, user_id) VALUES (1, 2);
-
--- Link Fabian (user_id=1) as guest
 INSERT INTO order_guests (order_id, user_id) VALUES (1, 1);
