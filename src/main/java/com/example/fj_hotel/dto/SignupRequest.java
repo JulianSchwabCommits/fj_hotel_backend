@@ -2,6 +2,7 @@ package com.example.fj_hotel.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
@@ -26,12 +27,14 @@ public class SignupRequest {
     @NotBlank(message = "Password is required")
     @Size(min = 6, max = 255, message = "Password must be between 6 and 255 characters")
     private String password;
-    
+      @NotBlank(message = "Phone number is required")
     @Size(max = 20, message = "Phone number cannot exceed 20 characters")
     private String phoneNumber;
     
+    @NotNull(message = "Birthdate is required")
     private LocalDate birthdate;
     
+    @NotBlank(message = "Address is required")
     @Size(max = 255, message = "Address cannot exceed 255 characters")
     private String address;
 }

@@ -11,4 +11,4 @@
 ## Quick Commands
 ```bash
 # Connect to database
-docker exec -it mariaDB mariadb -u root -p<pwhere> fj_hotel
+docker exec -it mariaDB mariadb -u root -p<pw> fj_hotel
