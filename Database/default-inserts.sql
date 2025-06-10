@@ -18,8 +18,8 @@ INSERT INTO rooms (room_name, capacity, room_type, category, price, picture_id) 
 
 -- Insert users
 INSERT INTO users (first_name, last_name, email, password, phone_number, birthdate, address) VALUES
-('Fabian', 'Spiri', 'fababum@gmail.com', '76bfb30e51b77a2da8ec902cff0fe997b4a9e9a5afddccef511c669155386c47', '+41 79 570 46 59', '2000-01-01', 'Some Street 2, Bern'),
-('Julian', 'Schwab', 'jla.schwab@gmail.com', 'bb299f20f2858d8936659521f8b1d0d27cddb31e6c45ae2efdbbe2580e0a7bc2', '+41 77 460 46 59', '2000-01-01', 'Some Street 1, Zürich');
+('Fabian', 'Spiri', 'fababum@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '+41 79 570 46 59', '2000-01-01', 'Some Street 2, Bern'),
+('Julian', 'Schwab', 'jla.schwab@gmail.com', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', '+41 77 460 46 59', '2000-01-01', 'Some Street 1, Zürich');
 
 -- Insert payment (for Julian)
 INSERT INTO payments (user_id, cardholder_name, card_number, expiry_month, expiry_year, cvv, billing_address) VALUES

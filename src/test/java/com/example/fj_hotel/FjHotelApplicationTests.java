@@ -1,10 +1,10 @@
-package com.example.fj_hotel_backend;
+package com.example.fj_hotel;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FjHotelBackendApplicationTests {
+class FjHotelApplicationTests {
 
 	@Test
 	void contextLoads() {
