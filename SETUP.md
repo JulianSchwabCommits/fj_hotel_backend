@@ -116,7 +116,7 @@ The project includes these key Spring Boot starters:
 
 #### Method 1: Using Maven
 ```bash
-mvn spring-boot:run
+
 ```
 
 

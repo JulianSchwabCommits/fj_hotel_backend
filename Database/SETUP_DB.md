@@ -38,7 +38,7 @@ jdbc:mysql://localhost:3306/fj_hotel
 **Manual Connection:**
 ```bash
 docker exec -it mysql mysql -u root -proot fj_hotel
-```
+```otel
 
 ## 📁 Files
 

@@ -7,8 +7,21 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
+            max-width:                } else {
+                    resultsDiv.innerHTML = `
+                        <div class="response-container error">
+                            <h4>❌ Registration Failed</h4>
+                            <p><strong>Status:</strong> ${response.status} ${response.statusText}</p>
+                            <p><strong>Message:</strong> ${responseData.message || 'An error occurred'}</p>
+                            <hr>
+                            <strong>Full Response:</strong><br>
+                            <pre>${JSON.stringify(responseData, null, 2)}</pre>
+                            <hr>
+                            <strong>Sent Data:</strong><br>
+                            <pre>${JSON.stringify(formData, null, 2)}</pre>
+                        </div>
+                    `;
+                }        margin: 0 auto;
             padding: 20px;
             background-color: #f5f5f5;
         }
@@ -234,7 +247,7 @@
                 email: document.getElementById('email').value,
                 phoneNumber: document.getElementById('phoneNumber').value,
                 password: document.getElementById('password').value,
-                birthdate: document.getElementById('birthdate').value,
+                birthdate: document.getElementById('birthdate').value, // ISO format: YYYY-MM-DD
                 address: document.getElementById('address').value
             };
 
@@ -249,6 +262,7 @@
             resultsDiv.style.display = 'block';
 
             try {
+                console.log('Sending signup request with data:', formData);
                 const response = await fetch(url, {
                     method: 'POST',
                     headers: {
@@ -258,6 +272,7 @@
                 });
 
                 const responseData = await response.json();
+                console.log('Server response:', responseData);
                 
                 if (response.ok && responseData.success) {
                     resultsDiv.innerHTML = `

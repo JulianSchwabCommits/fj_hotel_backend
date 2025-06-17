@@ -162,22 +162,22 @@
             <h4>🧪 Test Accounts</h4>
             <p>Click on any account to auto-fill the login form:</p>
             
-            <div class="demo-account" onclick="fillAccount('fababum@gmail.com', 'hello')">
+            <div class="demo-account" onclick="fillAccount('fababum@gmail.com', '123456')">
                 <strong>Fabian Spiri</strong><br>
                 Email: <code>fababum@gmail.com</code><br>
-                Password: <code>hello</code>
+                Password: <code>123456</code>
             </div>
             
-            <div class="demo-account" onclick="fillAccount('jla.schwab@gmail.com', 'hello')">
+            <div class="demo-account" onclick="fillAccount('jla.schwab@gmail.com', '123456')">
                 <strong>Julian Schwab</strong><br>
                 Email: <code>jla.schwab@gmail.com</code><br>
-                Password: <code>hello</code>
+                Password: <code>123456</code>
             </div>
             
-            <div class="demo-account" onclick="fillAccount('luc.stuzenegger@gmail.com', 'hello')">
+            <div class="demo-account" onclick="fillAccount('luc.stuzenegger@gmail.com', '123456')">
                 <strong>Luc Stützenegger</strong><br>
                 Email: <code>luc.stuzenegger@gmail.com</code><br>
-                Password: <code>hello</code>
+                Password: <code>123456</code>
             </div>
         </div>
         
@@ -223,7 +223,7 @@
         }
 
         function fillTestData() {
-            fillAccount('fababum@gmail.com', 'hello');
+            fillAccount('fababum@gmail.com', '123456');
         }
 
         function clearForm() {
@@ -247,6 +247,7 @@
             resultsDiv.style.display = 'block';
 
             try {
+                console.log('Sending login request with data:', formData);
                 const response = await fetch(url, {
                     method: 'POST',
                     headers: {
@@ -256,8 +257,18 @@
                 });
 
                 const responseData = await response.json();
+                console.log('Server login response:', responseData);
                 
                 if (response.ok && responseData.success) {
+                    // Save user data to localStorage for persistence across pages
+                    const userData = {
+                        userId: responseData.userId,
+                        firstName: responseData.firstName,
+                        lastName: responseData.lastName,
+                        email: responseData.email
+                    };
+                    localStorage.setItem('currentUser', JSON.stringify(userData));
+                    
                     resultsDiv.innerHTML = `
                         <div class="response-container success">
                             <h4>✅ Login Successful!</h4>
@@ -272,10 +283,13 @@
                     
                     // Show success and suggest next steps
                     setTimeout(() => {
-                        if (confirm('Login successful! Would you like to test the room availability endpoint?')) {
-                            window.open('available-rooms-test.html', '_blank');
+                        const redirectChoices = confirm('Login successful! Would you like to go to the order history page?');
+                        if (redirectChoices) {
+                            window.location.href = 'order-history.html';
+                        } else if (confirm('Would you like to book a room instead?')) {
+                            window.location.href = 'booking-test.html';
                         }
-                    }, 2000);
+                    }, 1000);
                     
                 } else {
                     resultsDiv.innerHTML = `
@@ -287,6 +301,9 @@
                             <hr>
                             <strong>Full Response:</strong><br>
                             <pre>${JSON.stringify(responseData, null, 2)}</pre>
+                            <hr>
+                            <strong>Sent Data:</strong><br>
+                            <pre>${JSON.stringify(formData, null, 2)}</pre>
                         </div>
                     `;
                 }

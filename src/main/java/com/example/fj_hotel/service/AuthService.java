@@ -1,6 +1,7 @@
 package com.example.fj_hotel.service;
 
 import com.example.fj_hotel.dto.AuthResponse;
+import com.example.fj_hotel.dto.ResetPasswordRequest;
 import com.example.fj_hotel.dto.SigninRequest;
 import com.example.fj_hotel.dto.SignupRequest;
 import com.example.fj_hotel.entity.User;
@@ -75,6 +76,34 @@ public class AuthService {
             
         } catch (Exception e) {
             return new AuthResponse("Error during login: " + e.getMessage(), false);
+        }
+    }
+    
+    public AuthResponse resetPassword(ResetPasswordRequest request) {
+        try {
+            Optional<User> userOptional = userRepository.findByEmail(request.getEmail());
+            
+            if (userOptional.isEmpty()) {
+                return new AuthResponse("User not found", false);
+            }
+            
+            User user = userOptional.get();
+            
+            // Update the password with a new hash
+            user.setPassword(PasswordUtil.hashPassword(request.getNewPassword()));
+            userRepository.save(user);
+            
+            return new AuthResponse(
+                "Password updated successfully", 
+                true, 
+                user.getUserId(), 
+                user.getEmail(), 
+                user.getFirstName(), 
+                user.getLastName()
+            );
+            
+        } catch (Exception e) {
+            return new AuthResponse("Error updating password: " + e.getMessage(), false);
         }
     }
 }

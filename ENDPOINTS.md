@@ -196,3 +196,152 @@ All dates must be in ISO 8601 format with time:
 - Standard Meeting Room 1 & 2: 10-12 people, $150-160
 - Deluxe Meeting Room 1 & 2: 20-22 people, $250-260
 - Suite Meeting Room 1 & 2: 30-35 people, $400-420
+
+---
+
+## 🛎️ **Orders & Bookings**
+
+### 4. **Create New Order/Booking**
+
+**Endpoint:** `POST /api/orders`
+
+**Description:** Creates a new booking for a room.
+
+**Request Body:**
+```json
+{
+  "userId": 1,
+  "roomId": 5,
+  "checkinDate": "2025-06-20T15:00:00",
+  "checkoutDate": "2025-06-22T11:00:00",
+  "paymentMethod": "credit_card",
+  "paymentId": null
+}
+```
+
+**Required Fields:**
+- `userId` (Integer): User ID making the booking
+- `roomId` (Integer): Room ID being booked
+- `checkinDate` (ISO DateTime): Check-in date and time
+- `checkoutDate` (ISO DateTime): Check-out date and time  
+- `paymentMethod` (String): Payment method - `credit_card`, `cash`, `other`
+
+**Optional Fields:**
+- `paymentId` (Integer): ID of payment transaction (if applicable)
+
+---
+
+### 5. **Get Order Details**
+
+**Endpoint:** `GET /api/orders/{orderId}`
+
+**Description:** Returns detailed information about a specific order.
+
+**Parameters:**
+- `orderId` (Path Parameter): Order ID (Integer)
+
+---
+
+### 6. **Get User Orders**
+
+**Endpoint:** `GET /api/orders/user/{userId}`
+
+**Description:** Returns all orders/bookings made by a specific user.
+
+**Parameters:**
+- `userId` (Path Parameter): User ID (Integer)
+
+---
+
+### 7. **Update Order Status**
+
+**Endpoint:** `PUT /api/orders/{orderId}/status`
+
+**Description:** Updates the status of an existing order.
+
+**Parameters:**
+- `orderId` (Path Parameter): Order ID (Integer)
+- `status` (Query Parameter): New status - `pending`, `confirmed`, `cancelled`, `completed`
+
+---
+
+### 8. **Cancel Order**
+
+**Endpoint:** `PUT /api/orders/{orderId}/cancel`
+
+**Description:** Cancels an existing order (sets status to cancelled).
+
+**Parameters:**
+- `orderId` (Path Parameter): Order ID (Integer)
+
+---
+
+## 🔧 **cURL Examples for Orders**
+
+### Create New Booking
+```bash
+curl -X POST "http://localhost:8080/api/orders" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "userId": 1,
+    "roomId": 5,
+    "checkinDate": "2025-06-20T15:00:00",
+    "checkoutDate": "2025-06-22T11:00:00",
+    "paymentMethod": "credit_card"
+  }'
+```
+
+### Get Order Details
+```bash
+curl -X GET "http://localhost:8080/api/orders/1"
+```
+
+### Get All Orders for a User
+```bash
+curl -X GET "http://localhost:8080/api/orders/user/1"
+```
+
+### Cancel an Order
+```bash
+curl -X PUT "http://localhost:8080/api/orders/1/cancel"
+```
+
+### Update Order Status
+```bash
+curl -X PUT "http://localhost:8080/api/orders/1/status?status=confirmed"
+```
+
+---
+
+## 📝 **Order Response Format**
+
+**Success Response (200 OK):**
+```json
+{
+  "orderId": 1,
+  "userId": 1,
+  "roomId": 5,
+  "roomName": "Suite Room 1",
+  "checkinDate": "2025-06-20T15:00:00",
+  "checkoutDate": "2025-06-22T11:00:00",
+  "paymentMethod": "credit_card",
+  "status": "confirmed",
+  "createdAt": "2025-06-17T10:30:45",
+  "message": "Order created successfully",
+  "success": true
+}
+```
+
+**Error Responses:**
+- `400 Bad Request`: Invalid order data or room not available
+- `404 Not Found`: Order or user not found
+- `500 Internal Server Error`: Database or server error
+
+---
+
+## 🗃️ **Order Status Values**
+
+- **pending**: Initial state when order is created but not yet confirmed
+- **confirmed**: Order has been confirmed by the system or admin
+- **cancelled**: Order has been cancelled by the user or admin
+- **completed**: Stay has been completed

@@ -159,6 +159,24 @@
                 <span class="status">✅ Implemented</span><br><br>
                 <a href="available-rooms-test.html" class="test-button" target="_blank">Test Now</a>
             </div>
+            
+            <div class="test-card" onclick="window.open('booking-test.html', '_blank')">
+                <div class="icon">🛎️</div>
+                <h3>Book a Room</h3>
+                <p>Search for available rooms and make a booking</p>
+                <span class="endpoint">POST /api/orders</span><br>
+                <span class="status">✅ Implemented</span><br><br>
+                <a href="booking-test.html" class="test-button" target="_blank">Test Now</a>
+            </div>
+            
+            <div class="test-card" onclick="window.open('order-history.html', '_blank')">
+                <div class="icon">🧾</div>
+                <h3>Order History</h3>
+                <p>View and manage your booking history</p>
+                <span class="endpoint">GET /api/orders/user/:id</span><br>
+                <span class="status">✅ Implemented</span><br><br>
+                <a href="order-history.html" class="test-button" target="_blank">Test Now</a>
+            </div>
         </div>
         
         <div class="api-info">
@@ -176,6 +194,15 @@
                 <strong>✅ Authentication:</strong><br>
                 <span class="endpoint">POST /api/auth/signup</span> - User registration<br>
                 <span class="endpoint">POST /api/auth/signin</span> - User login
+            </div>
+            
+            <div style="margin: 15px 0;">
+                <strong>✅ Bookings & Orders:</strong><br>
+                <span class="endpoint">POST /api/orders</span> - Create a new booking<br>
+                <span class="endpoint">GET /api/orders/:id</span> - Get booking details<br>
+                <span class="endpoint">GET /api/orders/user/:id</span> - Get user's bookings<br>
+                <span class="endpoint">PUT /api/orders/:id/cancel</span> - Cancel a booking<br>
+                <span class="endpoint">PUT /api/orders/:id/status</span> - Update booking status
             </div>
             
             <div style="margin: 15px 0;">
